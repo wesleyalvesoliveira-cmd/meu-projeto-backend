@@ -12,7 +12,7 @@ export class Player {
         // "Pegue"
         //
         this.name = name;
-        this.health =  health;
+        this.health = health;
         this.level = level;
     }
 
@@ -25,7 +25,7 @@ export class Player {
 }
 
     public takedamage (amout: number): string{
-        this.health -= amout;
+        this.health += amout;
         if (this.health < 0){
             this.health = 0; // não deixa a saúde ficar negativa
                     }
@@ -33,5 +33,9 @@ export class Player {
 return`${this.name} recebeu ${amout} de dano e agora tem ${this.health} de saúde.`;
                 }
 
+    public upLevel(): string {
+    this.level += 1;
+    return `Parabéns! ${this.name} subiu para o nível ${this.level}!`;
+}
 
 }
