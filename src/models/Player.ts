@@ -24,18 +24,31 @@ export class Player {
     return`${this.name} atacou e causou ${damage} de dano!`;
 }
 
-    public takedamage (amout: number): string{
-        this.health += amout;
+    public takeDamage (damage: number): string{
+        this.health += damage;
         if (this.health < 0){
             this.health = 0; // não deixa a saúde ficar negativa
-                    }
-        return `${this.name} Foi Derrotado`!
-return`${this.name} recebeu ${amout} de dano e agora tem ${this.health} de saúde.`;
-                }
+            return `${this.name} Foi Derrotado`!
+        }
+        return`${this.name} recebeu ${damage} de dano e agora tem ${this.health} de saúde.`;
+    }
 
-    public upLevel(): string {
-    this.level += 1;
+    public upLevel(level: number): string {
+    this.level += level;
+        if (this.level >= 100){
+            this.level = 100;
+            return `O level maximo foi atingido, level atual: ${level}`;
+        }
     return `Parabéns! ${this.name} subiu para o nível ${this.level}!`;
-}
+  }
+
+    public takeHealth(health: number): string{
+        this.health += health;
+        if (this.health >= 100 ){
+            this.health = 100; // não deixa a saúde ficar negativa
+            return `${this.name} já esta com a vida cheia!`;
+        }
+        return`${this.name} recebeu ${health} de vida e agora tem ${this.health} de saúde.`;
+    }
 
 }

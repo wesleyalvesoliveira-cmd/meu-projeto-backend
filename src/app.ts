@@ -85,11 +85,10 @@ app.post("/player/attack", (req: Request, res: Response) => {
 });
 
 app.post("/player/take-health", (req: Request, res: Response) => {
-  const { amount } = req.body;
-  
+  const { health } = req.body;
   // Chama o método passando a quantidade do body ou 10 como padrão
-  const healthMessage = player1.takedamage(amount || 10);
-
+  const healthMessage = player1.takeHealth(health);
+  savePlayerState(player1);
   res.json({
     action: healthMessage,
     currentHealth: player1.health,
@@ -97,8 +96,9 @@ app.post("/player/take-health", (req: Request, res: Response) => {
 });
 
 app.post("/player/up-level", (req: Request, res: Response) => {
-  const levelMessage = player1.upLevel();
-
+  const {level} = req.body;
+  const levelMessage = player1.upLevel(level);
+  savePlayerState(player1);
   res.json({
     action: levelMessage,
     currentLevel: player1.level,
@@ -108,7 +108,7 @@ app.post("/player/up-level", (req: Request, res: Response) => {
 
 app.post("/player/take-damage", (req: Request, res: Response) => {
   const { damage } = req.body;
-  const damageMessage = player1.takedamage(damage);
+  const damageMessage = player1.takeDamage(damage);
   // salvar o estado atual do player no arquivo JSON
   savePlayerState(player1);
   res.json({
